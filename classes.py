@@ -21,4 +21,9 @@ class Mentor:
                 student.grades[course] = [grade]
         else:
             return 'Ошибка'
- 
+
+class Lecturer(Mentor):
+    pass
+
+class Reviewer(Mentor):
+    pass
