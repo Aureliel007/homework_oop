@@ -78,3 +78,61 @@ class Reviewer(Mentor):
         return (f"Имя: {self.name}\n"
                 f"Фамилия: {self.surname}")
     
+def avg_grades(persons, course):    # Реализована единая функция для двух классов
+    grades_list = []
+    for person in persons:
+        grades_list += person.grades[course]
+    result = round(sum(grades_list) / len(grades_list), 1)
+    if isinstance(persons[0], Student):
+        print(f"Средняя оценка за домашние задания в рамках курса {course}: {result}")
+    elif isinstance(persons[0], Lecturer):
+        print(f"Средняя оценка за лекции в рамках курса {course}: {result}")
+
+    
+stud_1 = Student('Harry', 'Potter', 'Male')
+stud_1.courses_in_progress += ['Charms', 'Potions']
+stud_1.finished_courses += ['Transfiguration']
+
+stud_2 = Student('Hermione', 'Granger', 'Female')
+stud_2.courses_in_progress += ['Charms', 'Potions']
+stud_2.finished_courses += ['Herbology']
+
+lect_1 = Lecturer('Remus', 'Lupin')
+lect_1.courses_attached += ['Charms', 'Potions']
+
+lect_2 = Lecturer('Dolores', 'Umbridge')
+lect_2.courses_attached += ['Charms', 'Potions']
+
+rew_1 = Reviewer('Severus', 'Snape')
+rew_1.courses_attached += ['Charms', 'Potions']
+
+rew_2 = Reviewer('Albus', 'Dumbldore')
+rew_2.courses_attached += ['Charms', 'Potions']
+
+rew_1.rate_hw(stud_1, 'Charms', 9)
+rew_1.rate_hw(stud_1, 'Charms', 7)
+rew_1.rate_hw(stud_1, 'Potions', 8)
+rew_2.rate_hw(stud_2, 'Charms', 10)
+rew_2.rate_hw(stud_2, 'Potions', 9)
+rew_2.rate_hw(stud_2, 'Potions', 10)
+
+stud_1.rate_lc(lect_1, 'Charms', 10)
+stud_1.rate_lc(lect_1, 'Charms', 9)
+stud_1.rate_lc(lect_1, 'Charms', 8)
+stud_1.rate_lc(lect_2, 'Charms', 10)
+stud_1.rate_lc(lect_2, 'Charms', 9)
+stud_1.rate_lc(lect_2, 'Charms', 10)
+
+print(rew_1)
+print('-------')
+print(lect_1)
+print('-------')
+print(stud_1)
+print('-------')
+print(stud_2)
+print('-------')
+print(stud_1 < stud_2, stud_1 == stud_2, lect_1 > lect_2)
+print('-------')
+avg_grades([stud_1, stud_2], 'Potions')
+print('-------')
+avg_grades([lect_1, lect_2], 'Charms')
